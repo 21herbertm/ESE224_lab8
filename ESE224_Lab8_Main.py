@@ -41,7 +41,7 @@ def question_1_4(N, mu, sigma):
 
     #QUESTION 1.4 TWO-DIMENSIONAL GAUSSIAN SIGNALS
 
-    signal_2D = discrete_signal.compute_gaussian_2D(N, mu, sigma)
+    signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
     gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
     
     plt.imshow(gaussian_signal_2D, cmap='gray')
@@ -60,16 +60,20 @@ def question_1_4(N, mu, sigma):
     axs[1].plot(np.sum(gaussian_signal_2D, axis=0))
     axs[1].set_ylabel('Signal')
 
-    
+#************************** NEEDS WORK *****************************#################
+####################################################################################
+####################################################################################
+####################################################################################
+
 def q_815(N, mu, sigma):
 
     #Question 1.5
     
-    signal_2D = discrete_signal.compute_gaussian_2D(N, mu, sigma)
+    signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
     gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
     
     gaussian_DFT= discrete_signal.DFT_2D(gaussian_signal_2D)
-    gaussian_signal_DFT = gaussian_DFT.solve()
+    gaussian_signal_DFT = gaussian_DFT.compute_dft()
     
     plt.imshow(abs(gaussian_signal_DFT), cmap='gray')
     plt.colorbar()
@@ -80,11 +84,11 @@ def q_816(N, mu, sigma):
 
     #Question 1.6
     
-    signal_2D = discrete_signal.compute_iDFT_2D(N, mu, sigma)
-    gaussian_signal_2D, num_samples = signal_2D.solve() 
+    signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
+    gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
     
     gaussian_DFT = discrete_signal.DFT_2D(gaussian_signal_2D)
-    gaussian_signal_DFT = gaussian_DFT.solve()
+    gaussian_signal_DFT = gaussian_DFT.compute_dft()
     
     gaussian_iDFT = discrete_signal.compute_iDFT_2D(gaussian_signal_DFT)
     gaussian_signal_iDFT = gaussian_iDFT.solve2()
@@ -112,19 +116,17 @@ def q_822(N):
     N = N
     mu = (N-1)/2
     sigma = (N-1)/6
-    
-    signal_2D = discrete_signal.compute_gaussian_pulse_2D(N, mu, sigma)
+    #flename.classname
+    signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
     gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
     
     gaussian_con_2D = discrete_signal.Convolution_2D(img, gaussian_signal_2D)
-    filtered_img = gaussian_con_2D.compute_gaussian_2D()
+    filtered_img = gaussian_con_2D.compute_convolution_2D()
 
     plt.imshow(filtered_img, cmap='gray')
     plt.colorbar()
     plt.show()    
     
-    
-  
 
 ###############################################################################
 ################################## M A I N ####################################
@@ -132,18 +134,15 @@ def q_822(N):
 
 if __name__ == '__main__': 
     
-#    question_1_3(32, 4) # N= 32, L= 4
+    #question_1_3(32, 4) # N= 32, L= 4
 
-#    question_1_4(9, 2, 1)
-#    question_1_4(65, 2, 10)
-#    question_1_4(255, 128, 42)
+    #question_1_4(9, 2, 1)
+    #question_1_4(65, 2, 10)
+    #question_1_4(255, 128, 42)
 
     # N = 9, MU = 2, SIGMA= 1
     # N = 65, MU = 2, SIGMA= 10
     # N = 255, MU = 128, SIGMA= 42
-    
-#    q_815(10, 0, 2)
-    
-#    q_816(10, 0, 2)
-    
+    q_815(1,0,2)
+    q_816(10, 0, 2)
     q_822(7)

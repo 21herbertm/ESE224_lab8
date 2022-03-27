@@ -11,6 +11,7 @@ from scipy import signal
 # OUTPUTS INNER PRODUCT
 
 class inner_product_2D():
+# DOUBLE LOOP: SUMS THE PRODUCT BETWEEN AN ELEMENT OF X AND THE CONJUGATE OF THE CORRESPONDING ELEMENT OF Y
     def __init__(self, x, y):
         self.x_signal=x
         self.y_signal=y
@@ -40,6 +41,7 @@ class inner_product_2D():
 # INPUTS: FREQUENCIES K AND L , N=SIGNAL DURATION
 # RETURNS: 3 MATRICES (N BY N), (1) COMPLEX VALUES (2) REAL PARTS (3) IMAGINARY
 
+# INSERT A NESTED FOR LOOP ITERATES OVER DURATION OF THE SIGNAL
 class complex_exponential_2D():
     def __init__(self, k_frequency, l_frequency, N_frequency):
 
@@ -88,7 +90,7 @@ class square_pulse_2D():
 # OUTPUT: TWO GAUSSIAN PULSES
 
 
-class compute_gaussian_2D():
+class Gaussian_2D():
     def __init__(self, N, mu, sigma):
         
         self.N=N
@@ -104,7 +106,13 @@ class compute_gaussian_2D():
                 gaussian_pulse[i,j] = np.exp(-((i-self.mu)*(i-self.mu)+(j-self.mu)*(j-self.mu))/2/self.sigma/self.sigma)
             
         return gaussian_pulse, self.samples
-    
+
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
 #  QUESTION 1.5 DFT IN TWO DIMENSIONS
 # MODIFY PYTHON CLASS FROM THE ONE DIMENSIONAL DFT FROM LAB 2
 class DFT_2D():
@@ -116,17 +124,19 @@ class DFT_2D():
         self.x_signal_time=x_signal_time
         self.M=np.shape(x_signal_time)[0]
         self.N=np.shape(x_signal_time)[1]
+        #self.X_myarray= np.zeros([self.M,self.N],dtype=np.complex)
 
-    def raw_solve(self):
 
-        X = np.zeros([self.M, self.N], dtype=np.complex)
+    def compute_dft(self):
+
+        X_myarray = np.zeros([self.M, self.N], dtype=np.complex)
         for m in range(self.M):
             for n in range(self.N):
                 for i in range(self.M):
                     for j in range(self.N):
-                        X[m,n] = X[m,n] + self.X[i,j]/np.sqrt(self.M*self.N)*np.exp(-1j*2*cmath.pi*(m*i/self.M+n*j/self.N))
-            
-        return X
+                        X_myarray[m,n] = X_myarray[m,n] + X_myarray[i,j]/np.sqrt(self.M*self.N)*np.exp(-1j*2*cmath.pi*(m*i/self.M+n*j/self.N))
+
+        return X_myarray
     
     
 # QUESTION 1.6 iDFT in TWO DIMENSIONS
@@ -172,7 +182,7 @@ class Convolution_2D():
         self.x=x
         self.y=y
 
-    def solve(self):
+    def compute_convolution_2D(self):
         """
         \\\\\ METHOD: Compute 2-D convolution
         """
