@@ -60,14 +60,8 @@ def question_1_4(N, mu, sigma):
     axs[1].plot(np.sum(gaussian_signal_2D, axis=0))
     axs[1].set_ylabel('Signal')
 
-#************************** NEEDS WORK *****************************#################
-####################################################################################
-####################################################################################
-####################################################################################
 
-def q_815(N, mu, sigma):
-
-    #Question 1.5
+def question_1_5(N, mu, sigma):
     
     signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
     gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
@@ -80,9 +74,7 @@ def q_815(N, mu, sigma):
     plt.show()
 
 
-def q_816(N, mu, sigma):
-
-    #Question 1.6
+def question_1_6(N, mu, sigma):
     
     signal_2D = discrete_signal.Gaussian_2D(N, mu, sigma)
     gaussian_signal_2D, num_samples = signal_2D.compute_gaussian_pulse_2D()
@@ -91,19 +83,17 @@ def q_816(N, mu, sigma):
     gaussian_signal_DFT = gaussian_DFT.compute_dft()
     
     gaussian_iDFT = discrete_signal.compute_iDFT_2D(gaussian_signal_DFT)
-    gaussian_signal_iDFT = gaussian_iDFT.solve2()
+    gaussian_signal_iDFT = gaussian_iDFT.compute_iDFT()
     
     plt.imshow(abs(gaussian_signal_iDFT), cmap='gray')
     plt.colorbar()
     plt.show()   
     
     
-def q_821(N, L):
-
-    #Question 2.1
+def question_2_1(N, L):
     
-#    img = cv2.imread('imgA.png')  
-    img = mpimg.imread('imgB.png') 
+    #img = mpimg.imread('imgA.png')
+    img = mpimg.imread('imgB.png')
 
     plt.imshow(img, cmap='gray')
     plt.colorbar()
@@ -143,6 +133,7 @@ if __name__ == '__main__':
     # N = 9, MU = 2, SIGMA= 1
     # N = 65, MU = 2, SIGMA= 10
     # N = 255, MU = 128, SIGMA= 42
-    q_815(1,0,2)
-    q_816(10, 0, 2)
-    q_822(7)
+
+    #question_1_5(1,0,2)
+    #question_1_6(10, 0, 2)
+    question_2_1(25,25)

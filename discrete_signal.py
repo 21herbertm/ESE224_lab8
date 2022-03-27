@@ -107,12 +107,6 @@ class Gaussian_2D():
             
         return gaussian_pulse, self.samples
 
-
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-
 #  QUESTION 1.5 DFT IN TWO DIMENSIONS
 # MODIFY PYTHON CLASS FROM THE ONE DIMENSIONAL DFT FROM LAB 2
 class DFT_2D():
@@ -153,10 +147,11 @@ class compute_iDFT_2D():
 
         # X_signal has N^2 coefficients
 
-    def solve2(self):
-        """
-        \\\\\ METHOD: Compute the iDFT of X with N^2/2 coefficients
-        """
+    def compute_iDFT(self):
+        # COMPUTE THE iDFT of signal X
+        # N^2/2 COEFFICIENTS
+
+        # SIGNAL X IN THE TIME DOMAIN TO FREQUENCY
         x=np.zeros([self.M, self.N], dtype=np.complex)
         for m in range(self.M):
             for n in range(self.N):              
@@ -165,27 +160,33 @@ class compute_iDFT_2D():
                         x[m,n] = x[m,n] + self.X_signal[i,j]/np.sqrt(self.M*self.N)*np.exp(1j*2*cmath.pi*(m*i/self.M+n*j/self.N))
                         if i != 0:
                             x[m,n] = x[m,n] + np.conj(self.X_signal[i,j])/np.sqrt(self.M*self.N)*np.exp(1j*2*cmath.pi*(-m*i/self.M-n*j/self.N))
-
         return x
     
 
+# QUESTION 2.1 IMAGE FILTERING AND DE-NOISING
+# SPATIAL DE-NOISING
+# IMPLEMENT THE GAUSSIAN FILTERING
+# BASED FROM FUNCTION IN QUESTION 1.4
 
 class Convolution_2D():
+
     """
-    2-D convolution
+    In applications such as image processing, it can be useful to compare the input of a convolution directly to the output.
+    The conv2 function allows you to control the size of the output.
+    Create a 3-by-3 random matrix A and a 4-by-4 random matrix B. Compute the full convolution of A and B, which is a 6-by-6 matrix.
+
     """
+
+    # INPUT SIGNAL X
+    # FILTER Y
     def __init__(self, x, y):
-        """
-        input signal x
-        filter y
-        """
+
         self.x=x
         self.y=y
 
     def compute_convolution_2D(self):
-        """
-        \\\\\ METHOD: Compute 2-D convolution
-        """
+
         filtered_signal = signal.convolve2d(self.x, self.y, boundary='symm', mode='same')
-            
+        # averaging is a form of low-pass filtering and thus, we can de-noise 2-D signals by filtering
+        # filtering is represented as a convolution with the filter impulse response and in the two-dimensional case
         return filtered_signal
